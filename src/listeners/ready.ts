@@ -1,6 +1,6 @@
 const { Listener, Events } = require('@sapphire/framework');
 
-class ReadyListener extends Listener {
+export class ReadyListener extends Listener {
   constructor(context, options) {
     super(context, {
       ...options,
@@ -13,5 +13,3 @@ class ReadyListener extends Listener {
     this.container.logger.info(`Logged in as ${this.container.client.user.tag}`);
   }
 }
-
-module.exports = { ReadyListener };

@@ -1,5 +1,5 @@
 import { Command } from '@sapphire/framework';
-import { APIGuildMember, APIGuildMemberJoined, APIInteractionGuildMember, PermissionsBitField } from 'discord.js';
+import { ChatInputCommandInteraction, CommandInteraction, GuildMember, Options, PermissionsBitField } from 'discord.js';
 
 const PAINT_ROLE_NAME_REGEX = /^Paint #[0-9A-F]{6}$/;
 
@@ -27,7 +27,7 @@ function normalizeHexColor(input: string) {
   };
 }
 
-function getMemberRoleIds(interactionMember: APIGuildMember) {
+function getMemberRoleIds(interactionMember: GuildMember) {
   if (!interactionMember) return [];
 
   // In guild interactions this can be either a GuildMember or an APIInteractionGuildMember.
@@ -35,7 +35,7 @@ function getMemberRoleIds(interactionMember: APIGuildMember) {
   // - APIInteractionGuildMember.roles is an array of role IDs
   if (Array.isArray(interactionMember.roles)) return interactionMember.roles;
 
-  if (interactionMember.roles) {
+  if (interactionMember.roles.cache) {
     return [...interactionMember.roles.cache.keys()];
   }
 
@@ -43,14 +43,14 @@ function getMemberRoleIds(interactionMember: APIGuildMember) {
 }
 
 class PaintCommand extends Command {
-  constructor(context, options) {
+  constructor(context: Command.LoaderContext, options: Options) {
     super(context, {
       ...options,
       description: 'Give yourself a role with a specific color (e.g. /paint #ff00ff)'
     });
   }
 
-  registerApplicationCommands(registry) {
+  registerApplicationCommands(registry: Command.Registry) {
     registry.registerChatInputCommand(
       (builder) =>
         builder
@@ -69,7 +69,7 @@ class PaintCommand extends Command {
     );
   }
 
-  async chatInputRun(interaction) {
+  async chatInputRun(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply({ ephemeral: true });
 
     try {

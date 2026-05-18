@@ -1,18 +1,16 @@
 import { Listener } from "@sapphire/framework";
 import { GuildMember } from "discord.js";
 
-class GuildMemberAddListener extends Listener {
-    public constructor(context: Listener.LoaderContext, options: Listener.Options) {
-        super(context, {
-            ...options,
-            once: true,
-            event: 'guildMemberAdd'
-        });
-    }
+export class GuildMemberAddListener extends Listener {
+  public constructor(context: Listener.LoaderContext, options: Listener.Options) {
+    super(context, {
+      ...options,
+      once: true,
+      event: 'guildMemberAdd'
+    });
+  }
 
-    run(member: GuildMember) {
+  run(member: GuildMember) {
 
-    }
+  }
 }
-
-module.exports = { GuildMemberAddListener };
