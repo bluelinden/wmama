@@ -1,0 +1,10 @@
+name = "wmama-discord-interactions"
+main = "src/worker.mjs"
+compatibility_date = "2026-05-18"
+
+# You will set secrets with:
+#   wrangler secret put DISCORD_PUBLIC_KEY
+#   wrangler secret put DISCORD_APPLICATION_ID
+#   wrangler secret put DISCORD_TOKEN
+#
+# For local dev you can create a .dev.vars file (see .dev.vars.example)

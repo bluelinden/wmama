@@ -1,0 +1,9 @@
+# Used by `wrangler dev`
+# Copy to `.dev.vars` and fill values
+
+DISCORD_PUBLIC_KEY=
+DISCORD_APPLICATION_ID=
+DISCORD_TOKEN=
+
+# Optional: only needed if you register commands to a single guild while developing.
+DISCORD_GUILD_ID=
